@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewBag.Title = "_OtherRooms";
+}
+<section class="py-5 bg-light">
+    <div class="container px-4 px-lg-5 mt-5">
+        <h2 class="fw-bolder mb-4 text-center">Visit Other Rooms</h2>
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            @foreach (var item in ViewBag.OtherRooms)
+            {
+                <div class="col mb-5">
+                    <div class="card h-100">
+                        <img class="card-img-top" src="@Url.Content(item.Image)" alt="..." style="height:70%"/>
+                        <div class="card-body p-4">
+                            <div class="text-center">
+                                <h5 class="fw-bolder">@item.RoomName</h5>
+                               Rs. @item.Price
+                            </div>
+                        </div>
+                        <!-- Product actions-->
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                            <div class="text-center">
+                            @Html.ActionLink("Details", "RoomDetails", new { id = item.RoomId }, new { @class = "btn btn-outline-dark mt-auto" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+</section>

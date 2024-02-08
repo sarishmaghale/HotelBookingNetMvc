@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="HotelDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="RoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int32" />
+    <Property Name="UserRole" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="tbUser" Relationship="HotelDbModel.FK__Roles__UserId__4CA06362" FromRole="Role" ToRole="tbUser" />
+  </EntityType>
+  <EntityType Name="RoomTable">
+    <Key>
+      <PropertyRef Name="RoomId" />
+    </Key>
+    <Property Name="RoomId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RoomName" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Availability" Type="Int32" />
+    <Property Name="Price" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Image" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Capacity" Type="Int32" />
+    <Property Name="Beds" Type="Int32" />
+    <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityContainer Name="HotelDbEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Roles" EntityType="Self.Role" />
+    <EntitySet Name="RoomTables" EntityType="Self.RoomTable" />
+    <EntitySet Name="BookTables" EntityType="HotelDbModel.BookTable" />
+    <EntitySet Name="tbUsers" EntityType="HotelDbModel.tbUser" />
+    <AssociationSet Name="FK__Roles__UserId__4CA06362" Association="HotelDbModel.FK__Roles__UserId__4CA06362">
+      <End Role="tbUser" EntitySet="tbUsers" />
+      <End Role="Role" EntitySet="Roles" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="BookTable">
+    <Key>
+      <PropertyRef Name="BookId" />
+    </Key>
+    <Property Name="BookId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int32" />
+    <Property Name="RoomId" Type="Int32" />
+    <Property Name="Quantity" Type="Int32" />
+    <Property Name="Date" Type="DateTime" Precision="0" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="status" Type="Int32" />
+    <Property Name="Days" Type="Int32" />
+    <Property Name="Total" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tbUser">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="UserPassword" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="UserPhone" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="AddProvince" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="AddCity" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Roles" Relationship="HotelDbModel.FK__Roles__UserId__4CA06362" FromRole="tbUser" ToRole="Role" />
+    <Property Name="status" Type="Int32" />
+  </EntityType>
+  <Association Name="FK__Roles__UserId__4CA06362">
+    <End Type="HotelDbModel.tbUser" Role="tbUser" Multiplicity="0..1" />
+    <End Type="HotelDbModel.Role" Role="Role" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbUser">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Role">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

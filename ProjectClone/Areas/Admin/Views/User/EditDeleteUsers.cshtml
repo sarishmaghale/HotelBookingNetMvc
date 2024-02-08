@@ -1,0 +1,52 @@
+﻿
+@{
+    ViewBag.Title = "EditDeleteUsers";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>EditDeleteUsers</h2>
+
+
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">UserId</th>
+            <th scope="col">UserName</th>
+            <th scope="col">UserPhone</th>
+            <th scope="col" colspan="2">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in ViewBag.UserData)
+        {
+            <tr>
+                <td>@item.UserId</td>
+                <td>@item.UserName</td>
+                <td>@item.UserPhone</td>
+                @*<td>
+                        <button class="btn btn-outline-info" onclick="EditUser(@item.UserId)">Edit</button>
+                    </td>*@
+                <td>
+                    <button class="btn btn-outline-danger" onclick="DeleteUser(@item.UserId)">Delete</button>
+                </td>
+            </tr>
+
+        }
+
+    </tbody>
+</table>
+
+<script>
+    function DeleteUser(obj) {
+        $.ajax({
+            url: "@Url.Action("DeleteUser", "User", new {area="Admin"})",
+            method: "Post",
+            data: { UserId: obj },
+
+        });
+         window.location.href = "@Url.Action("Manageusers", "User")";
+    }
+</script>
+

@@ -1,0 +1,48 @@
+﻿<button type="button" class="btn btn-link" data-toggle="modal" data-target="#myModal">
+    Click here to Login
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">LoginForm</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body float-start">
+                @using (Html.BeginForm("LoginUser", "User", new {area="Common"}, FormMethod.Post))
+                {
+                    <div class="form-group row">
+                        <div class="col-4">
+                            <label for="inputEmail">Username/Email:</label>
+                        </div>
+                        <div class="col-8">
+                            <input class="form-control" id="UserName" name="UserName" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-4">
+                            <label for="inputPassword">Password</label>
+                        </div>
+                        <div class="col-8">
+                            <input class="form-control" id="UserPassword" name="UserPassword" />
+                        </div>
+                    </div>
+                    <div>
+                        <button class="btn btn-primary" type="submit">Submit</button>
+                    </div>
+                    <br />
+                    <p>
+                        Dont't have an account?<br />
+                        <a href="@Url.Action("Create","User")">Register here</a>
+                    </p>
+
+                }
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,79 @@
+﻿@using ProjectClone.Models
+@model RoomsViewModel
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<section class="py-5">
+    <div class="container px-4 px-lg-5 my-4">
+        <div class="row gx-4 gx-lg-5 align-items-center">
+            <div class="col-md-6">
+                <img class="card-img-top mb-5 mb-md-0" src="@Url.Content(Model.Image)" alt="..." />
+            </div>
+            <div class="col-md-6">
+                <div class="small mb-1">
+
+                </div>
+                <h1 class="display-5 fw-bolder">
+                    @Html.DisplayFor(model => model.RoomName) Room
+                </h1>
+                <div class="fs-5 mb-5">
+
+                    <span> Rs. @Html.DisplayFor(model => model.Price)</span>
+                </div>
+                <p class="lead">
+                    Number of Rooms:
+                    @Html.DisplayFor(model => model.Availability)
+                    <br />
+                    <span style="color:green">
+                        (**  @Html.Raw(TempData["AvailableRooms"]) Rooms Available Today**)
+                    </span>
+                    <br />
+                    Price: Rs. @Html.DisplayFor(model => model.Price)
+                    <br />
+                    Capacity: @Html.DisplayFor(model => model.Capacity)
+                    <br />
+                    Number of beds: @Html.DisplayFor(model => model.Beds)
+
+                    <span class="text-break">
+                        @Html.DisplayFor(model => model.Description)
+                    </span>
+                </p>
+                <div class="d-flex">
+                    @Html.ActionLink("Book Now", "ConfirmBooking", "Book", new { area = "User", id = Model.RoomId }, new { @class = "btn btn-outline-danger flex-shrink-0" })
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@Html.Partial("_OtherRooms")
+
+<script>
+    $("#SearchByDate").click(function () {
+        var date = $("#AvailByDate").val();
+        var id = $("#RoomId").val();
+        $.ajax({
+            url: "@Url.Action("AvailByDate","Room")",
+            method: "Get",
+            data: { Date: date, id:id },
+            success: function (response) {
+                var val = response;
+               
+                $(".RoomsByDate").empty();
+                $(".RoomsByDate").append(val);
+            },
+            error: function () {
+                alert('failed');
+            }
+         });
+    })
+
+    $("#ClearSearchByDate").click(function () {
+        $("#AvailByDate").empty();
+        $(".RoomsByDate").empty();
+    })
+</script>

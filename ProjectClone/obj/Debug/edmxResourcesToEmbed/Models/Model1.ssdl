@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="HotelDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="BookTable">
+    <Key>
+      <PropertyRef Name="BookId" />
+    </Key>
+    <Property Name="BookId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" />
+    <Property Name="RoomId" Type="int" />
+    <Property Name="Quantity" Type="int" />
+    <Property Name="Date" Type="date" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" />
+    <Property Name="Phone" Type="nchar" MaxLength="10" />
+    <Property Name="status" Type="int" />
+    <Property Name="Days" Type="int" />
+    <Property Name="Total" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Roles">
+    <Key>
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="RoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="int" />
+    <Property Name="UserRole" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="RoomTable">
+    <Key>
+      <PropertyRef Name="RoomId" />
+    </Key>
+    <Property Name="RoomId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RoomName" Type="nchar" MaxLength="10" />
+    <Property Name="Availability" Type="int" />
+    <Property Name="Price" Type="nchar" MaxLength="10" />
+    <Property Name="Image" Type="nvarchar" MaxLength="100" />
+    <Property Name="Capacity" Type="int" />
+    <Property Name="Beds" Type="int" />
+    <Property Name="Description" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="tbUser">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="100" />
+    <Property Name="UserPassword" Type="nvarchar" MaxLength="100" />
+    <Property Name="UserPhone" Type="nchar" MaxLength="10" />
+    <Property Name="AddProvince" Type="nvarchar" MaxLength="100" />
+    <Property Name="AddCity" Type="nvarchar" MaxLength="100" />
+    <Property Name="status" Type="int" />
+  </EntityType>
+  <Association Name="FK__Roles__UserId__4CA06362">
+    <End Role="tbUser" Type="Self.tbUser" Multiplicity="0..1" />
+    <End Role="Roles" Type="Self.Roles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbUser">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Roles">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="HotelDbModelStoreContainer">
+    <EntitySet Name="BookTable" EntityType="Self.BookTable" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RoomTable" EntityType="Self.RoomTable" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbUser" EntityType="Self.tbUser" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Roles__UserId__4CA06362" Association="Self.FK__Roles__UserId__4CA06362">
+      <End Role="tbUser" EntitySet="tbUser" />
+      <End Role="Roles" EntitySet="Roles" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

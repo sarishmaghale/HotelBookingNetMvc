@@ -1,0 +1,27 @@
+﻿@using ProjectClone.Models
+@model IEnumerable<RoomsViewModel>
+
+@{
+    ViewBag.Title = "Rooms";
+}
+@Html.Raw(TempData["BookingRequest"])
+@foreach (var item in Model)
+{
+    <div class="card flex-row">
+        <img class="card-img-left" src="@Url.Content(item.Image)" style="width:30%" alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title">@item.RoomName</h5>
+            <p class="card-text">
+                <b>Price: Rs.@item.Price</b><br />
+                <span class="opacity-75"><i class="fa fa-user"> @item.Capacity People</i></span><br />
+                <span class="opacity-75"><i class="fa fa-bed"> @item.Beds Beds</i></span>
+            </p>
+
+
+            @Html.ActionLink("Details", "RoomDetails", new { id = item.RoomId }, new { @class = "btn btn-outline-info" })
+            @Html.ActionLink("Book", "ConfirmBooking", "Book", new { area = "User", id = item.RoomId }, new { @class = "btn btn-outline-danger" })
+        </div>
+    </div>
+    <br />
+}
+

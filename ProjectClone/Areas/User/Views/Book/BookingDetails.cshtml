@@ -1,0 +1,71 @@
+﻿@model ProjectClone.Areas.User.Data.BookingViewModel
+@{
+    ViewBag.Title = "Booked";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <div class="row m-0">
+        <div class="col-lg-7 pb-5 pe-lg-5">
+            <div class="row">
+               
+                    <img src="@Url.Content(Model.Image)"
+                         alt="" style="">
+             
+                <div class="row m-0 bg-light">
+                    <div class="col-md-4 col-6 ps-30 pe-0 my-4">
+                        <p class="text-muted">Room Type:</p>
+                        <p class="h5"><span class="ps-1">@Model.RoomName Rom</span></p>
+                    </div>
+                    <div class="col-md-4 col-6  ps-30 my-4">
+                        <p class="text-muted">Room Price:</p>
+                        <p class="h5 m-0"> Rs. @Model.Price</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-5 p-0 ps-lg-4">
+            <div class="row m-0">
+                
+                <div class="col-12 px-4">
+                    <div class="d-flex align-items-end mt-4 mb-2">
+                        <p class="h4 mb-4">
+                            <span class="pe-1">Booking Details</span>
+                        </p>
+                        <br />
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <p class="textmuted">Quantity:</p>
+                        <p class="fs-14 fw-bold">@Model.Quantity</p>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <p class="textmuted">Total Cost:</p>
+                        <p class="fs-14 fw-bold"> Rs. @Model.Total  </p>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <p class="textmuted">Date:</p>
+                        <p class="fs-14 fw-bold"><span class="fas fa-dollar-sign pe-1"></span>@Html.DisplayFor(x=>x.Date)</p>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <p class="textmuted">Days:</p>
+                        <p class="fs-14 fw-bold">@Model.Days</p>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <p class="textmuted">Your Contact No:</p>
+                        <p class="fs-14 fw-bold"><span class="fas fa-dollar-sign px-1"></span>@Model.Phone</p>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <p class="textmuted">Name: </p>
+                        <p class="fs-14 fw-bold"><span class="fas fa-dollar-sign px-1"></span>@Model.Name</p>
+                    </div>
+                    <div class="d-flex justify-content-between mb-3">
+                        <p class="textmuted fw-bold">BookedID:</p>
+                        <div class="d-flex align-text-top ">
+                            <span class="fas fa-dollar-sign mt-1 pe-1 fs-14 "></span><span class="h4">@Model.BookId</span>
+                        </div>
+                    </div>
+                </div>
+
+                </div>
+            </div>
+        </div>
+    </div>

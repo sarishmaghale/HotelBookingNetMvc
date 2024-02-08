@@ -1,0 +1,141 @@
+﻿@model IEnumerable<ProjectClone.Areas.Admin.Data.BookTableViewModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<button class="btn-link viewAllBookings">View All</button>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.BookId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RoomId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RoomId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+
+                <button class="btn btn-outline-info" type="button" onclick="DetailBookings(@item.BookId,@item.UserId,@item.RoomId)">Details</button>
+                <button class="btn btn-outline-danger" onclick="DeleteBookings(@item.BookId)">CheckOut</button>
+
+
+
+            </td>
+        </tr>
+    }
+
+</table>
+
+<div class="modal" id="BookingDetailsModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+
+                <div class="form-group">
+                    <label for="UserName">UserName:</label>
+                    <input class="form-control" id="UserName" name="UserName" placeholder="UserName" />
+                </div>
+                <div class="form-group">
+                    <label for="RoomName">Room Type:</label>
+                    <input class="form-control" id="RoomName" name="RoomName" placeholder="RoomName" />
+                </div>
+                <div class="form-group">
+                    <label for="Date">Booking Date:</label>
+                    <input class="form-control" id="Date" name="Date" placeholder="Date" />
+                </div>
+                <div class="form-group">
+                    <label for="Date">Contact Number:</label>
+                    <input class="form-control" id="Phone" name="Phone" placeholder="Phone" />
+                </div>
+                <div class="form-group">
+                    <label for="Price">Price:</label>
+                    <input class="form-control" id="Price" name="Price" placeholder="Price" />
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js"></script>
+<script>
+    function DeleteBookings(BookId) {
+        $.ajax({
+            url: "@Url.Action("CheckOut", "Booking")",
+            method: "Post",
+            data: { BookedId: BookId },
+            success: function () {
+                alert('Checked Out & deleted');
+                window.location.href = "@Url.Action("Index","Booking")";
+            },
+            error: function () {
+                alert('failed');
+            }
+        });
+    }
+
+
+    function DetailBookings(BookId,UserId,RoomId) {
+
+        $.ajax({
+            url: "@Url.Action("BookingDetails","Booking")",
+            method: "GET",
+            data: { BookId: BookId, UserId:UserId, RoomId: RoomId },
+            success: function (response) {
+                var test = moment(response.Date);
+                var a = test.format("YYYY-MM-DD ");
+                $("#RoomName").val(response.RoomName);
+                $("#UserName").val(response.UserName);
+                $("#Price").val(response.Total);
+                $("#Date").val(a);
+                $("#Phone").val(response.Phone);
+                $("#BookingDetailsModal").modal('show');
+            },
+            error: function () {
+                alert('failed');
+            }
+        });
+
+        $(".close").click(function () {
+            $("#BookingDetailsModal").modal('hide');
+        });
+    }
+
+
+</script>
+
