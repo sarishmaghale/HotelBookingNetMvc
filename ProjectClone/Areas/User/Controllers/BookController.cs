@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI.WebControls;
 
 namespace ProjectClone.Areas.User.Controllers
 {
@@ -14,10 +15,12 @@ namespace ProjectClone.Areas.User.Controllers
         // GET: User/Book
         private IUserRepo booking;
         private SharedRepository content;
-        public BookController(IUserRepo _booking, SharedRepository _content)
+        private PaymentRepo paymentService;
+        public BookController(IUserRepo _booking, SharedRepository _content, PaymentRepo _paymentService)
         {
             booking = _booking;
             content = _content;
+            paymentService = _paymentService;
         }
         public ActionResult ConfirmBooking(int id)
         {
@@ -39,7 +42,9 @@ namespace ProjectClone.Areas.User.Controllers
                 if (result == true)
                 {
                     int id = booking.ConfirmBooking(books);
+                   
                     TempData["BookingRequest"] = "<script>alert('Successfully booked!')</script>";
+
                     return RedirectToAction("BookingDetails", "Book", new { BookId = id });
                 }
                 else
@@ -47,6 +52,7 @@ namespace ProjectClone.Areas.User.Controllers
                     TempData["FailRequest"] = "<script>alert('Requested rooms not available')</script>";
                     return RedirectToAction("ConfirmBooking", new { id = books.RoomId });
                 }
+                
             }
             else
             {
@@ -69,6 +75,33 @@ namespace ProjectClone.Areas.User.Controllers
                 return View(data);
         
            
+        }
+        [HttpPost]
+        public ActionResult Payment(BookingViewModel model)
+        {
+
+                    EsewaPaymentRequest paymentModel = new EsewaPaymentRequest()
+                    {
+                        amt = model.Total,
+                        psc = "0",
+                        pdc = "0",
+                        txAmt = "0",
+                        tAmt = model.Total,
+                        pid = model.BookId.ToString(),
+                        scd = "EPAYTEST",
+                        su = Url.Action("UpdateBookings", "Book", null, Request.IsSecureConnection ? "https" : "http"),
+                        fu = Url.Action("ConfirmBooking", "Book", null, Request.IsSecureConnection ? "https" : "http")
+                    };
+                    var paymentUrl = paymentService.InitiatePayment(paymentModel);
+            TempData["BookId"] = model.BookId;
+                    return Redirect(paymentUrl);                
+            
+        }
+        public ActionResult UpdateBookings()
+        {
+            int BookId =(int)TempData["BookId"];
+            int id = booking.UpdateBookings(BookId);
+            return RedirectToAction("BookingDetails", new { BookId = id});
         }
     }
 }

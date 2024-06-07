@@ -30,6 +30,7 @@ namespace ProjectClone.Areas.User.Data
         public string Phone { get; set; }
         public Nullable<int> Days { get; set; }
 
+        public Nullable<int> PayStatus { get; set; }
 
         public string Image { get; set; }
     }

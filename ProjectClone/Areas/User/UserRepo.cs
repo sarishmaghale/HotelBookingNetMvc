@@ -37,7 +37,7 @@ namespace ProjectClone.Areas.User.Utility
             var total = Int32.Parse(roominfo.Price) * (int)books.Days*(int)books.Quantity;
             BookTable data = new BookTable()
             {
-                
+
                 RoomId = books.RoomId,
                 UserId = books.UserId,
                 Quantity = books.Quantity,
@@ -45,8 +45,9 @@ namespace ProjectClone.Areas.User.Utility
                 Name = books.Name,
                 Phone = books.Phone,
                 status = 1,
-                Days=books.Days,
-                Total= total.ToString()
+                Days = books.Days,
+                Total = total.ToString(),
+                PayStatus = 0,
             };
             db.BookTables.Add(data);
             int res = db.SaveChanges();
@@ -153,7 +154,8 @@ namespace ProjectClone.Areas.User.Utility
                                 RoomName=rooms.RoomName,
                                 Image=rooms.Image,
                                 Price=rooms.Price,
-                                Total=books.Total
+                                Total=books.Total,
+                                PayStatus=books.PayStatus,
                             })).FirstOrDefault();
             return data;
         }
@@ -188,6 +190,14 @@ namespace ProjectClone.Areas.User.Utility
 
 
             
+        }
+        public int UpdateBookings(int BookId)
+        {
+           var data= db.BookTables.Where(x => x.BookId == BookId).FirstOrDefault();
+            data.PayStatus = 1;
+            db.Entry(data).State = System.Data.Entity.EntityState.Modified;
+            db.SaveChanges();
+            return BookId;
         }
     }
 }

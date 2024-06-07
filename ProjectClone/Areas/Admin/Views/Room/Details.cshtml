@@ -27,7 +27,7 @@
                     @Html.DisplayFor(model => model.Availability)
                     <br />
                     <span style="color:green">
-                        (**  @Html.Raw(TempData["AvailableRooms"]) Rooms Available at the moment**)
+                        (**  @Html.Raw(ViewBag.AvailableRooms) Rooms Available at the moment**)
                     </span>
                     <br />
                     Price: Rs. @Html.DisplayFor(model => model.Price)

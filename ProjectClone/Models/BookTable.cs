@@ -24,5 +24,6 @@ namespace ProjectClone.Models
         public Nullable<int> status { get; set; }
         public Nullable<int> Days { get; set; }
         public string Total { get; set; }
+        public Nullable<int> PayStatus { get; set; }
     }
 }

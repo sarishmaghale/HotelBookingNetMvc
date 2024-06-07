@@ -16,5 +16,6 @@ namespace ProjectClone.Areas.User.Utility
        int ConfirmBooking(BookingViewModel books);
         BookingViewModel GetBookingDetails(int Id);
         IEnumerable<BookingViewModel> GetUserBookings(string name);
+        int UpdateBookings(int BookId);
     }
 }

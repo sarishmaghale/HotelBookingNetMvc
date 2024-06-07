@@ -48,6 +48,11 @@ namespace ProjectClone.Areas.Common.Controllers
         [HttpPost]
         public ActionResult LoginUser(UsersViewModel users)
         {
+            /* admin info
+             * email=admin@gmail.com
+             * pass=admin
+             * */
+
             bool result=user.LogInData(users);
             if (result)
             {

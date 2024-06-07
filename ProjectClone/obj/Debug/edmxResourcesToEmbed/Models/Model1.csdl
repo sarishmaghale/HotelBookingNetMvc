@@ -46,6 +46,7 @@
     <Property Name="status" Type="Int32" />
     <Property Name="Days" Type="Int32" />
     <Property Name="Total" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PayStatus" Type="Int32" />
   </EntityType>
   <EntityType Name="tbUser">
     <Key>

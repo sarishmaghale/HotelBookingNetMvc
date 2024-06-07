@@ -1,6 +1,7 @@
 
 using ProjectClone.Areas.Admin.Utility;
 using ProjectClone.Areas.Common.Utility;
+using ProjectClone.Areas.User;
 using ProjectClone.Areas.User.Utility;
 using ProjectClone.Utility;
 using System.Web.Mvc;
@@ -21,7 +22,7 @@ namespace ProjectClone
             container.RegisterType<ICommonRepo, CommonRepo>();
             container.RegisterType<IUserRepo, UserRepo>();
             container.RegisterType<IAdminRepo, AdminRepo>();
-
+            container.RegisterType<PaymentRepo>();
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
         }
     }

@@ -1,0 +1,15 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\ProjectClone",
+    "\\ProjectClone\\Areas",
+    "\\ProjectClone\\Areas\\Admin",
+    "\\ProjectClone\\Areas\\Admin\\Controllers",
+    "\\ProjectClone\\Areas\\Common",
+    "\\ProjectClone\\Areas\\Common\\Controllers",
+    "\\ProjectClone\\Areas\\Common\\Views",
+    "\\ProjectClone\\Areas\\Common\\Views\\User"
+  ],
+  "SelectedNode": "\\ProjectClone\\Areas\\Admin\\Controllers\\RoomController.cs",
+  "PreviewInSolutionExplorer": false
+}

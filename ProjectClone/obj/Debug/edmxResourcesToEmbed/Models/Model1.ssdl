@@ -14,6 +14,7 @@
     <Property Name="status" Type="int" />
     <Property Name="Days" Type="int" />
     <Property Name="Total" Type="nvarchar" MaxLength="50" />
+    <Property Name="PayStatus" Type="int" />
   </EntityType>
   <EntityType Name="Roles">
     <Key>

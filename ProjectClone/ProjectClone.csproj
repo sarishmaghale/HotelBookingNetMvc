@@ -159,6 +159,9 @@
     <Compile Include="Areas\Common\ICommonRepo.cs" />
     <Compile Include="Areas\User\Controllers\BookController.cs" />
     <Compile Include="Areas\User\Data\BookingViewModel.cs" />
+    <Compile Include="Areas\User\Data\EsewaPaymentRequest.cs" />
+    <Compile Include="Areas\User\Data\EsewaPaymentResponse.cs" />
+    <Compile Include="Areas\User\PaymentRepo.cs" />
     <Compile Include="Areas\User\UserAreaRegistration.cs" />
     <Compile Include="Areas\User\IUserRepo.cs" />
     <Compile Include="Areas\User\UserRepo.cs" />

@@ -27,6 +27,7 @@
     <EntitySetMapping Name="BookTables">
       <EntityTypeMapping TypeName="HotelDbModel.BookTable">
         <MappingFragment StoreEntitySet="BookTable">
+          <ScalarProperty Name="PayStatus" ColumnName="PayStatus" />
           <ScalarProperty Name="Total" ColumnName="Total" />
           <ScalarProperty Name="Days" ColumnName="Days" />
           <ScalarProperty Name="status" ColumnName="status" />
