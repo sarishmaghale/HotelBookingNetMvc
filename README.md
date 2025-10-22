@@ -3,7 +3,32 @@
 This is a basic Hotel Management System built using **ASP.NET MVC (.NET Framework)** with Entity Framework (Database-First). The system is divided into two areas: **Admin** and **User**.
 
 ---
+## 🖼️ Project Screenshots  
 
+### 🏠 Home Page
+<p align="center">
+  <img src="Screenshots/hotel.PNG" alt="Hotel Home Page" width="700">
+</p>
+
+---
+
+### 🛎️ Booking & Dashboard Overview
+<p align="center">
+  <img src="Screenshots/Hotel1.png" alt="Hotel Booking Dashboard" width="700">
+</p>
+<p align="center">
+  <img src="Screenshots/Hotel2.png" alt="Room Management" width="700">
+</p>
+
+---
+
+### 👨‍💻 Admin Panel
+Admin panel for managing hotel operations, rooms, and bookings.
+<p align="center">
+  <img src="Screenshots/Hotel3.png" alt="Admin Panel" width="700">
+</p>
+
+---
 ## 🔧 Features
 
 ### 👤 User Area
